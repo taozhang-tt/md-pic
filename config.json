@@ -1,0 +1,9 @@
+{
+	"type": "ali",
+	"secret_id": "LTAI5tFyivHY6qJjak3cAeDw",
+	"secret_key": "oinCh9Rw6gADLZ7iBgDNW3iAxGTh6z",
+	"bucket": "taozhang",
+	"region": "oss-cn-hongkong",
+    "domain": "http://pic.zero-tt.fun",
+    "dir": "mdpic"
+}
