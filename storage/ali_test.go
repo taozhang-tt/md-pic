@@ -8,10 +8,10 @@ import (
 
 func TestAliUploadBytes(t *testing.T) {
 	Convey("AliUploadBytes", t, func() {
-		secretId := "LTAI4G5aNwjYSLrqrmaDzFMq"
-		secretKey := "gONBIxAdB9KuQULq769bveRsrRmk3t"
-		bucket := "wuchang-tt"
-		region := "oss-cn-hongkong"
+		secretId := ""
+		secretKey := ""
+		bucket := ""
+		region := ""
 
 		ali := new(Ali)
 		ali.UploadBytes(secretId, secretKey, bucket, region, []byte("Hello World!"), "uploadbytes.txt")
