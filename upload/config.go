@@ -18,7 +18,7 @@ type Config struct {
 var cnf = new(Config)
 
 func init() {
-	bs, err := ioutil.ReadFile("config.json")
+	bs, err := ioutil.ReadFile("/etc/mdpic.json")
 	if err != nil {
 		panic(err)
 	}
