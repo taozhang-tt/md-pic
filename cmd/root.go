@@ -1,23 +1,23 @@
 package cmd
 
 import (
-	"mdpic/upload"
+	"mdpic/manage"
 
 	"github.com/spf13/cobra"
 )
 
 var (
-	rootCmd = &cobra.Command{
+	RootCmd = &cobra.Command{
 		Use:   "mdpic",
-		Short: "A upload util",
+		Short: "Oss management util",
 		Run:   f,
 	}
 )
 
 func Execute() error {
-	return rootCmd.Execute()
+	return RootCmd.Execute()
 }
 
 func f(cmd *cobra.Command, args []string) {
-	upload.UploadFromClipboard()
+	manage.UploadFromClipboard()
 }

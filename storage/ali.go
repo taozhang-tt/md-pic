@@ -65,3 +65,21 @@ func (a *Ali) UploadFile(secretId, secretKey, bucketName, region string, filePat
 		os.Exit(-1)
 	}
 }
+
+func (a *Ali) DeleteObject(secretId, secretKey, bucketName, region, key string) error {
+	endpoint := fmt.Sprintf("http://%v.aliyuncs.com", region)
+
+	// 创建OSSClient实例。
+	client, err := oss.New(endpoint, secretId, secretKey)
+	if err != nil {
+		return err
+	}
+
+	// 获取存储空间。
+	bucket, err := client.Bucket(bucketName)
+	if err != nil {
+		return err
+	}
+	err = bucket.DeleteObject(key)
+	return err
+}

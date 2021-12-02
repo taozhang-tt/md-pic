@@ -1,4 +1,4 @@
-package upload
+package manage
 
 import (
 	"encoding/json"

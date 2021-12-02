@@ -1,4 +1,4 @@
-package upload
+package manage
 
 import (
 	"fmt"
@@ -31,4 +31,20 @@ func UploadFromClipboard() {
 
 	_ = clipboard.Write(clipboard.FmtText, []byte(addr))
 	fmt.Printf("pic upload success\n")
+}
+
+func DeleteObject(keys []string) {
+	for _, key := range keys {
+		fileName := fmt.Sprintf("%v.png", key)
+		if cnf.Dir != "" {
+			fileName = cnf.Dir + "/" + fileName
+		}
+		ali := new(storage.Ali)
+		err := ali.DeleteObject(cnf.SecretId, cnf.SecretKey, cnf.Bucket, cnf.Region, fileName)
+		if err != nil {
+			fmt.Printf("Delete fail: %v\n", err)
+		} else {
+			fmt.Printf("Delete %v success\n", key)
+		}
+	}
 }
