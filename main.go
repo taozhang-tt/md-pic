@@ -1,8 +1,8 @@
 package main
 
 import (
-	"mdpic/cmd"
-	_ "mdpic/cmd/remove"
+	"github.com/taozhang-tt/mdpic/cmd"
+	_ "github.com/taozhang-tt/mdpic/cmd/remove"
 )
 
 func main() {

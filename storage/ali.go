@@ -6,21 +6,36 @@ import (
 	"os"
 
 	"github.com/aliyun/aliyun-oss-go-sdk/oss"
+
+	"github.com/taozhang-tt/mdpic/config"
 )
 
-type Ali struct{}
+type Ali struct {
+	SecretId   string
+	SecretKey  string
+	BucketName string
+	Region     string
+}
 
-func (a *Ali) UploadBytes(secretId, secretKey, bucketName, region string, bs []byte, fileName string) (domain string, err error) {
-	endpoint := fmt.Sprintf("http://%v.aliyuncs.com", region)
+func NewAli(cnf *config.Config) Storage {
+	return &Ali{
+		SecretId:   cnf.SecretId,
+		SecretKey:  cnf.SecretKey,
+		BucketName: cnf.Bucket,
+		Region:     cnf.Region,
+	}
+}
 
+func (a *Ali) UploadBytes(fileName string, bs []byte) (domain string, err error) {
+	endpoint := fmt.Sprintf("http://%v.aliyuncs.com", a.Region)
 	// 创建OSSClient实例。
-	client, err := oss.New(endpoint, secretId, secretKey)
+	client, err := oss.New(endpoint, a.SecretId, a.SecretKey)
 	if err != nil {
 		return "", err
 	}
 
 	// 获取存储空间。
-	bucket, err := client.Bucket(bucketName)
+	bucket, err := client.Bucket(a.BucketName)
 	if err != nil {
 		return "", err
 	}
@@ -30,21 +45,21 @@ func (a *Ali) UploadBytes(secretId, secretKey, bucketName, region string, bs []b
 	if err != nil {
 		return "", err
 	}
-	domain = fmt.Sprintf("http://%v.%v.aliyuncs.com", bucketName, region)
+	domain = fmt.Sprintf("http://%v.%v.aliyuncs.com", a.BucketName, a.Region)
 	return domain, nil
 }
 
-func (a *Ali) UploadFile(secretId, secretKey, bucketName, region string, filePath, fileName string) {
-	endpoint := fmt.Sprintf("http://%v.aliyuncs.com", region)
+func (a *Ali) UploadFile(filePath, fileName string) {
+	endpoint := fmt.Sprintf("http://%v.aliyuncs.com", a.Region)
 	// 创建OSSClient实例。
-	client, err := oss.New(endpoint, secretId, secretKey)
+	client, err := oss.New(endpoint, a.SecretId, a.SecretKey)
 	if err != nil {
 		fmt.Println("Error:", err)
 		os.Exit(-1)
 	}
 
 	// 获取存储空间。
-	bucket, err := client.Bucket(bucketName)
+	bucket, err := client.Bucket(a.BucketName)
 	if err != nil {
 		fmt.Println("Error:", err)
 		os.Exit(-1)
@@ -66,17 +81,17 @@ func (a *Ali) UploadFile(secretId, secretKey, bucketName, region string, filePat
 	}
 }
 
-func (a *Ali) DeleteObject(secretId, secretKey, bucketName, region, key string) error {
-	endpoint := fmt.Sprintf("http://%v.aliyuncs.com", region)
+func (a *Ali) DeleteObject(key string) error {
+	endpoint := fmt.Sprintf("http://%v.aliyuncs.com", a.Region)
 
 	// 创建OSSClient实例。
-	client, err := oss.New(endpoint, secretId, secretKey)
+	client, err := oss.New(endpoint, a.SecretId, a.SecretKey)
 	if err != nil {
 		return err
 	}
 
 	// 获取存储空间。
-	bucket, err := client.Bucket(bucketName)
+	bucket, err := client.Bucket(a.BucketName)
 	if err != nil {
 		return err
 	}

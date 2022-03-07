@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"mdpic/manage"
+	"github.com/taozhang-tt/mdpic/manage"
 
 	"github.com/spf13/cobra"
 )

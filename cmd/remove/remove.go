@@ -1,10 +1,9 @@
 package remove
 
 import (
-	"mdpic/cmd"
-	"mdpic/manage"
-
 	"github.com/spf13/cobra"
+
+	"github.com/taozhang-tt/mdpic/cmd"
 )
 
 var (
@@ -22,9 +21,7 @@ var (
 
 func init() {
 	cmd.RootCmd.AddCommand(rmCmd)
-
 }
 
 func runRemove(cmd *cobra.Command, args []string) {
-	manage.DeleteObject(keys)
 }

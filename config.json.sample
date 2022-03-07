@@ -5,5 +5,8 @@
 	"bucket": "桶的名字",
 	"region": "地区",
 	"domain": "域名，如果有的话",
-	"dir": "路径(dir/test)，可以不配置，直接上传到桶的根目录"
+	"dir": "路径(dir/test)，可以不配置，直接上传到桶的根目录",
+    "github_token": "githug access token",
+    "github_repo": "存储图片的仓库",
+    "github_owner": "仓库拥有者"
 }
