@@ -20,7 +20,9 @@
 
 ## 2022-03-07
 
-* 新增上传至github功能，配置文件新增三项
+* 新增上传至github功能
+
+配置文件新增三项，如果使用github做图床，配置type 为 github，并配置以下三箱
 ```
 github_token
 github_repo
