@@ -4,6 +4,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/taozhang-tt/mdpic/cmd"
+	"github.com/taozhang-tt/mdpic/manage"
 )
 
 var (
@@ -24,4 +25,5 @@ func init() {
 }
 
 func runRemove(cmd *cobra.Command, args []string) {
+	manage.DeleteObject(keys)
 }

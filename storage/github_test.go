@@ -13,8 +13,31 @@ import (
 
 func Test(t *testing.T) {
 	Convey("Test github upload", t, func() {
-		Upload()
+		Delete()
 	})
+}
+
+func Delete() {
+	ctx := context.Background()
+	ts := oauth2.StaticTokenSource(
+		&oauth2.Token{AccessToken: ""},
+	)
+	tc := oauth2.NewClient(ctx, ts)
+
+	client := github.NewClient(tc)
+
+	opts := &github.RepositoryContentFileOptions{
+		Message: github.String("测试传文件"),
+		SHA:     github.String("59c2f68c6ad35fe28c0bdf846666f968a131d794"),
+
+		//Committer: &github.CommitAuthor{Name: github.String("TT"), Email: github.String("taozhang.tt@gmail.com")},
+	}
+	r1, r2, err := client.Repositories.DeleteFile(ctx, "taozhang-tt", "pictures", "44.png", opts)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Printf("r1: %+v\n, r2: %+v\n", r1, r2)
 }
 
 func Upload() {
@@ -33,11 +56,10 @@ func Upload() {
 		Content: bs,
 		//Committer: &github.CommitAuthor{Name: github.String("TT"), Email: github.String("taozhang.tt@gmail.com")},
 	}
-	r1, r2, err := client.Repositories.CreateFile(ctx, "taozhang-tt", "pictures", "1646631812.png", opts)
+	r1, r2, err := client.Repositories.CreateFile(ctx, "taozhang-tt", "pictures", "44.png", opts)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 	fmt.Printf("r1: %+v\n, r2: %+v\n", r1, r2)
-
 }
